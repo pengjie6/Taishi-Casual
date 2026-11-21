@@ -1,19 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using TTSDK;
 #endif
 
-// 广告平台枚举
+// 广告平台枚举（本项目只发布抖音小游戏，TopOn / 微信小游戏分支已移除）
 public enum AdPlatformType
 {
     [InspectorName("抖音小游戏")]
     TickTok,
-    [InspectorName("TopOn聚合")]
-    TopOn,
-    [InspectorName("微信小游戏")]
-    WebChat,
 }
 
 
@@ -114,11 +110,9 @@ public class AdManager : MonoBehaviour
         switch (adPlatformType)
         {
             case AdPlatformType.TickTok:
+            default:
                 platFormIns = new TikTokPlatform(this.AppId, this.GetRandVideoAdId(), this.GetRandScreenAdId());
 
-                break;
-            case AdPlatformType.TopOn:
-                Debug.LogWarning("TopOn广告平台尚未实现");
                 break;
         }
         
@@ -168,32 +162,6 @@ public class AdManager : MonoBehaviour
     public void ShowInterstitialAd()
     {
         this.platFormIns?.ShowInterstitialAd(this.GetRandScreenAdId());
-    }
-
-    /// <summary>
-    /// 播放插屏广告（带回调）
-    /// 插屏没有「看完」的概念，所以只提供「广告关闭」回调，用来判断广告确实展示过了。
-    /// </summary>
-    /// <param name="onClosed">广告关闭回调（说明广告成功展示并关闭）</param>
-    /// <param name="onFail">广告无法展示回调（冷却中、未加载完成、平台未初始化等）</param>
-    public void ShowInterstitialAd(Action onClosed, Action<string> onFail)
-    {
-        if (this.platFormIns == null)
-        {
-            Debug.LogError("广告平台实例未初始化，无法显示插屏广告");
-            onFail?.Invoke("广告平台实例未初始化");
-            return;
-        }
-
-        if (this.platFormIns is TikTokPlatform tikTokPlatform)
-        {
-            tikTokPlatform.ShowInterstitialAd(this.GetRandScreenAdId(), onClosed, onFail);
-            return;
-        }
-
-        // 其他平台还没有回调能力，退化成无回调播放
-        this.platFormIns.ShowInterstitialAd(this.GetRandScreenAdId());
-        onClosed?.Invoke();
     }
 
     /// <summary>

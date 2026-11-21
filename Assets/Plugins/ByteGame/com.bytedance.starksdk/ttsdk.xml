@@ -2573,6 +2573,11 @@
             设置是否循环播放，默认为 false
             </summary>
         </member>
+        <member name="T:TTSDK.UnityMobileKeyboardInputFieldBridge">
+            <summary>
+            将适配层 onKeyboardComplete 返回的审核文本写回拉起键盘时选中的 Unity 输入框。
+            </summary>
+        </member>
         <member name="T:TTSDK.SingletonBase`1">
             <summary>
             单例抽象类
@@ -7512,6 +7517,38 @@
         <member name="F:TTSDK.TTAndroidNativeInitInfo.unitySDKVersion">
             <summary>
             初始化 Unity native 小游戏调用链路的设置
+            </summary>
+        </member>
+        <member name="T:TTSDK.TTJSB">
+            <summary>
+            Public entry point for calling host JavaScript APIs that are not wrapped by the current TTSDK version.
+            Call this only after TT.InitSDK completes successfully.
+            </summary>
+        </member>
+        <member name="M:TTSDK.TTJSB.GetTT">
+            <summary>
+            Gets the mini-game base library global object (globalThis.tt).
+            </summary>
+        </member>
+        <member name="M:TTSDK.TTJSB.GetGlobal(System.String)">
+            <summary>
+            Gets a named JavaScript global object.
+            </summary>
+        </member>
+        <member name="M:TTSDK.TTJSB.CreateObject">
+            <summary>
+            Creates an empty JavaScript object that can be populated and passed to Invoke.
+            </summary>
+        </member>
+        <member name="T:TTSDK.TTJSObject">
+            <summary>
+            Managed wrapper around a retained JavaScript object reference.
+            Dispose the wrapper when it is no longer needed.
+            </summary>
+        </member>
+        <member name="T:TTSDK.TTJSCallback">
+            <summary>
+            Managed JavaScript function reference for APIs that accept a callback as a direct argument.
             </summary>
         </member>
         <member name="T:TTSDK.RecoveryUtils">

@@ -1,5 +1,5 @@
 {
-  "deviceOrientation":"portrait",
+  "deviceOrientation":"$DEVICE_ORIENTATION",
   "menuButtonStyle":"$MENU_BUTTON_STYLE",
   "enableWebGL2":$ENABLEWEBGL2,
   "enableIOSHighPerformanceMode": true,
@@ -18,7 +18,7 @@
   ],
   "plugins": {
     "UnityPlugin": {
-      "version": "4.44.0",
+      "version": "4.45.1",
       "provider": "tt674511f8f84ea91612"
     }
   },

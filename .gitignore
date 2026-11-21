@@ -17,6 +17,9 @@
 *.unitypackage
 *.app
 
+# ── 混淆器运行日志（每次构建产生数 MB，无版本价值） ──
+/Assets/OPS/Obfuscator/Log/
+
 # ── 本地备份目录（工作室自用，不进仓库） ──
 /Backup/
 /Backups/

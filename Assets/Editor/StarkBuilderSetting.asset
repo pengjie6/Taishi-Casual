@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1677285531, guid: 6b5ec8ff908d8444f858d5759cbad821, type: 3}
+  m_Script: {fileID: 1677285531, guid: 5edc36a2a9f8cd04ab320b097412343b, type: 3}
   m_Name: StarkBuilderSetting
   m_EditorClassIdentifier: 
   tag: 0
   wasmResourceUrl: http://
-  OutputDir: E:\unitystudy\project\ArcherRogue\tt-minigame
+  OutputDir: "E:\\unitystudy\\project\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\tt-minigame"
   useByteAudioAPI: 0
-  wasmMemorySize: 128
-  isWebGL2: 0
+  wasmMemorySize: 256
+  isWebGL2: 1
   needCompress: 1
   symbolMode: 1
   profiling: 0
@@ -52,10 +52,10 @@ MonoBehaviour:
   NativeWhiteListRegex:
   - com.bytedance.starksdk
   - _Backup~
-  _appId: tt1ede686380a0448002
+  _appId: ttc5aab3175bd752dc07
   version: 
   autoVersion: 0
-  _webglPackagePath: E:\unitystudy\project\ArcherRogue\tt-minigame\tt-minigame
+  _webglPackagePath: "E:\\unitystudy\\project\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\Unity2022_\u6CE1\u6CE1\u5F39\u5C04\u5408\u6210_BubbleMerge\\tt-minigame\\tt-minigame"
   _orientation: 0
   _iOSPerformancePlus: 0
   _menuButtonStyle: 0

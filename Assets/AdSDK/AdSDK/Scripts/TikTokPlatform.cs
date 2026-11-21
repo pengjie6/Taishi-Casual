@@ -33,8 +33,6 @@ public class TikTokPlatform : IAdPlatform
     // 插屏广告
     private TTInterstitialAd interAdIns;
     private string interAdId = "";
-    private Action onInterstitialClosed;
-    private Action<string> onInterstitialFail;
     private float moduleStartTime;
     private float lastShowTime;
 
@@ -99,15 +97,6 @@ public class TikTokPlatform : IAdPlatform
     /// https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/open-capacity/ads/tt-create-interstitial-ad
     public override void ShowInterstitialAd(string AdId)
     {
-        this.ShowInterstitialAd(AdId, null, null);
-    }
-
-    /// <summary>
-    /// 播放插屏广告（带回调）：广告关闭后回调 onClosed；无法展示时回调 onFail。
-    /// 插屏没有「看完」的概念，外部只能依赖「关闭」来判断广告确实展示过。
-    /// </summary>
-    public void ShowInterstitialAd(string AdId, Action onClosed, Action<string> onFail)
-    {
         Debug.Log("播放插屏广告");
 
         // 广告位变化时重建实例，避免继续使用旧广告位
@@ -117,21 +106,16 @@ public class TikTokPlatform : IAdPlatform
             this.RemoveInterstitialAd();
         }
 
-        this.onInterstitialClosed = onClosed;
-        this.onInterstitialFail = onFail;
-
         float now = Time.realtimeSinceStartup;
         if (now - moduleStartTime < 15f)
         {
             Debug.LogWarning("广告模块启动15秒内不能展示插屏广告");
-            this.FailInterstitial("插屏广告需要预热15秒，请稍后再试");
             return;
         }
         if (now - lastShowTime < 30f)
         {
             float remainingTime = 30f - (now - lastShowTime);
             Debug.LogWarning($"两次插屏广告展示间隔需大于30秒，剩余时间: {remainingTime:F1} 秒");
-            this.FailInterstitial("广告展示过于频繁，请稍后再试");
             return;
         }
 
@@ -146,7 +130,6 @@ public class TikTokPlatform : IAdPlatform
                 Debug.LogWarning($"[抖音广告] 创建插屏失败：{e.Message}");
             }
             Debug.LogWarning("插屏广告开始加载，本次先不展示");
-            this.FailInterstitial("插屏广告正在加载，请稍后再试");
             return;
         }
 
@@ -163,7 +146,6 @@ public class TikTokPlatform : IAdPlatform
         if (!loaded)
         {
             Debug.LogWarning("插屏广告尚未加载完成，本次跳过");
-            this.FailInterstitial("插屏广告正在加载，请稍后再试");
             return;
         }
 
@@ -175,21 +157,7 @@ public class TikTokPlatform : IAdPlatform
         catch (Exception e)
         {
             Debug.LogWarning($"[抖音广告] 展示插屏异常：{e.Message}");
-            this.FailInterstitial("插屏广告展示异常");
         }
-    }
-
-    /// <summary>
-    /// 广告没能展示时通知外部，并清空回调避免重复触发
-    /// </summary>
-    private void FailInterstitial(string message)
-    {
-        var fail = this.onInterstitialFail;
-
-        this.onInterstitialClosed = null;
-        this.onInterstitialFail = null;
-
-        fail?.Invoke(message);
     }
 
     private void CreateInterstitialAd()
@@ -205,19 +173,12 @@ public class TikTokPlatform : IAdPlatform
             catch (Exception e) { Debug.LogWarning($"[抖音广告] 预创建插屏失败：{e.Message}"); }
             // 3.发送埋点
             this.SendGameAddiction();
-
-            var closed = this.onInterstitialClosed;
-            this.onInterstitialClosed = null;
-            this.onInterstitialFail = null;
-
-            closed?.Invoke();
         };
         interAdIns.OnLoad += () => Debug.Log("插屏广告加载完成");
         interAdIns.OnError += (code, message) =>
         {
             Debug.LogWarning($"插屏广告异常 ： {code}  {message}");
             this.RemoveInterstitialAd();
-            this.FailInterstitial($"插屏广告加载失败（{code}）");
         };
         interAdIns.Load();
     }

@@ -1,0 +1,22 @@
+v1.0.5
+IAP store images fixes
+PU enum fixes
+
+v1.0.4
+Core update
+
+v1.0.3
+Minor bugfixes
+All coin icons in UI linked to the currency system
+
+v1.0.2
+Particle effects reworked
+Watermelon Core update
+
+v1.0.1
+Fixed iOS vibration bug
+Reworked PU system's structure
+Watermelon Core update
+
+v1.0.0
+Release

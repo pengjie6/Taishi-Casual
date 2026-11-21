@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
-  - Ground
-  - Obstacle
+  - Bubble
   layers:
   - Default
   - TransparentFX
@@ -14,18 +12,18 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - Player Projectile
-  - Enemy Projectile
-  - Enemies Detector
-  - Player Detector
-  - Obstacle
-  - Room Exit
-  - Drop
-  - Ground
-  - Chest
-  - Weapon Holder
+  - Trajectory
+  - Bubble
+  - BubbleActive
+  - Wall
+  - BubbleMerging
+  - Teleport
+  - Cage
+  - Magnet
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
